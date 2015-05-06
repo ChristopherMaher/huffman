@@ -24,9 +24,9 @@ public class Encode {
 			int count2 = 0;
 			while ((str = in.readLine()) != null) {
 				//thng = str;
-				Huffmantree test = new Huffmantree(str);
+				FrequencyTable test = new FrequencyTable(str);
 				//Huffmantree.regex1();
-				Huffmantree.countFreq();
+				FrequencyTable.countFreq();
 
 			}
 
