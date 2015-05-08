@@ -1,39 +1,47 @@
 package huffman;
 
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.util.Scanner;
 
 public class Encode {
 
 	public Encode(){
 		
 	}
-	public void frequencyCounter() throws IOException{
 
+	
+	public static void main(String... args) throws IOException {
+		FrequencyTable test = new FrequencyTable();
+
+		InputStream inputstream = new FileInputStream("test2.txt");
+
+		byte[] data      = new byte[1024];
+		int    bytesRead = inputstream.read(data);
+
+		while(bytesRead != -1) {
+
+			int counter;
+			
+			for(int i =0; i < data.length && i < 20; i++)
+				FrequencyTable.countFreq(data[i]);
 		
+			bytesRead = inputstream.read(data);
+		}
+		inputstream.close();
+		HuffmanTree.create_initial_node_array();
+		HuffmanTree.buildtree();
 	}
-
-	 public static void main(String[] args) throws IOException{
-		 BufferedReader in = new BufferedReader(new FileReader("sample.txt"));
-			String str;
-			String thng = null;
-			int count = 0;
-			int count2 = 0;
-			while ((str = in.readLine()) != null) {
-				//thng = str;
-				FrequencyTable test = new FrequencyTable(str);
-				//Huffmantree.regex1();
-				FrequencyTable.countFreq();
-
-			}
-
-			in.close();
-			//System.out.print(thng);
-			//Huffmantree test = new Huffmantree(str);
-			//Huffmantree.regex1();
-			//Huffmantree.countFreq();
-	 }
 }
+
+

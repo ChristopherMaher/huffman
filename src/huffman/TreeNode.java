@@ -1,11 +1,16 @@
 package huffman;
 
 public class TreeNode {
-private int frequency;
-private String letter;
-
-public TreeNode(int frequency,String letter){
+public int frequency;
+public String characters;
+TreeNode left;    
+TreeNode right;   
+TreeNode parent;
+public TreeNode(int frequency,String characters){
 	this.frequency=frequency;
-	this.letter= letter;
-}
+	this.characters= characters;
+	left = null;
+	right = null;
+	}
+
 }
