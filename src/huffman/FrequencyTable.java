@@ -31,16 +31,22 @@ int counters =0;
   if(character_set.add(file)==true){
 	  frequencyHash.put(file, 0);
    		}
+  if(file !=0){
   int temp=frequencyHash.get(file);
   temp++;
   frequencyHash.remove(file);
   frequencyHash.put(file,temp);
    cont++;
- 
-//System.out.print(frequencyHash);
+   		
+System.out.println(frequencyHash);
+  }
 return frequencyHash;
 }
-/*public static void create_initial_node_array(){
+
+/*public static void canonicalHash(){
+	for(String character : character_set)
+}
+*//*public static void create_initial_node_array(){
     
 	Collection c = frequencyHash.values();
 	Integer[] values = (Integer[])(c.toArray(new Integer[c.size()]));

@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.nio.charset.Charset;
 import java.util.Scanner;
 
 public class Encode {
@@ -24,9 +25,9 @@ public class Encode {
 	public static void main(String... args) throws IOException {
 		FrequencyTable test = new FrequencyTable();
 
-		InputStream inputstream = new FileInputStream("test2.txt");
+		InputStream inputstream = new FileInputStream("sample.txt");
 
-		byte[] data      = new byte[1024];
+		byte[] data   = new byte[1024];
 		int    bytesRead = inputstream.read(data);
 
 		while(bytesRead != -1) {
@@ -41,6 +42,13 @@ public class Encode {
 		inputstream.close();
 		HuffmanTree.create_initial_node_array();
 		HuffmanTree.buildtree();
+		//System.out.println("ASCII => " + Charset.forName("ASCII"));
+		//String s = "Hello World! \u00ff";
+		//byte[] b = s.getBytes("98");
+		//System.out.println(new String(b, "ISO-98"));
+	//	System.out.println((char)65); 
+		
+		
 	}
 }
 
