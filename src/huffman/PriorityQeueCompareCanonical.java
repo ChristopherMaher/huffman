@@ -3,8 +3,10 @@ package huffman;
 import java.util.Comparator;
 
 public class PriorityQeueCompareCanonical implements Comparator<TreeNode> {
-
-
+/**
+ * @param TreeNode o1,o2
+ * designed to help make the canonical huffman codes
+ */
 		@Override
 		public int compare(TreeNode o1, TreeNode o2) {
 			// TODO Auto-generated method stub
@@ -13,7 +15,6 @@ public class PriorityQeueCompareCanonical implements Comparator<TreeNode> {
 			int node_characters1 = Integer.parseInt(o1.characters);
 			int node_characters2 = Integer.parseInt(o2.characters);
 
-		//	int node_character number = 
 			
 			if(node_depth1 > node_depth2){
 				return -1;

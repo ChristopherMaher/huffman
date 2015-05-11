@@ -8,67 +8,70 @@ import java.io.InputStream;
 import java.util.PriorityQueue;
 
 public class Decode {
+	static int number_of_symbols;
+	public Decode(){
+		
+	}
 	public static PriorityQeueCompareCanonical pqcCanonical=new PriorityQeueCompareCanonical();
-	//static PriorityQueue<TreeNode> pqCanonical=new PriorityQueue<TreeNode>(character_set_Nodes.size()+1,pqcCanonical);
 
 
 	 public static void main(String[] args) throws IOException{
-		 //FrequencyTable test = new FrequencyTable();
-
-		InputStream inputstream = new FileInputStream("sample3.huf");
-		 int number_of_symbols = inputstream.read();
+		 
+		InputStream inputstream = new FileInputStream(args[0]);
+		byte[] data   = new byte[1024];
+		  number_of_symbols = inputstream.read();
 		 PriorityQueue<TreeNode> pqCanonical=new PriorityQueue<TreeNode>(number_of_symbols,pqcCanonical);
 		 int counter = 0;
-		// String symbol;
 		 while(number_of_symbols>counter){
-			int symbol;
+			String symbol;
 			 int initial_read = inputstream.read();
 			 if(initial_read == 0){
-				  symbol = "E.O.F";
+				 	symbol = Integer.toString(0);
 					int depth = inputstream.read();
 					TreeNode temp1=new TreeNode(symbol,depth);
-					//	System.out.print(depth);
 					pqCanonical.add(temp1);
+					DecoderHuffmanTree.pqTree.add(temp1);
 					 counter++;
 			 }else{
-			 symbol = Character.toString((char)initial_read);
-			
-			 int depth = (char)inputstream.read();
-			// HashMapDecode.canonicalHashDecode.put(symbol,depth);
+				symbol = Integer.toString(initial_read);
+				int depth = inputstream.read();
 				TreeNode temp1=new TreeNode(symbol,depth);
+				DecoderHuffmanTree.pqTree.add(temp1);
 				pqCanonical.add(temp1);
 
 			 counter++;
-			// System.out.print(symbol);
 		 }
-		 }		
+		 }	
+		 
+	
+		 String s = "0";
 		while(!pqCanonical.isEmpty()){
-			//TreeNode temp=pqCanonical.poll();
-			
+			TreeNode temp=pqCanonical.poll();
+			if(s.length()< temp.depth)
+		        while(s.length() != temp.depth){
+		        	s = "0"+s;
+		        }
+		     
+		       System.out.println(temp.characters+":"+s);
+		       	temp.canonical_code=s;
+		        s = Integer.toBinaryString(Integer.valueOf(s, 2) + 1);
+		        
+	
 		}
-			 
-		 
-		 System.out.print(HashMapDecode.canonicalHashDecode);
-		// fread(&buffer, 1, 1, file); 
-		 
-		 /*
-			byte[] data   = new byte[5];
-			int    bytesRead = inputstream.read(data);
-			int counter=0;
+		int    bytesRead = inputstream.read(data);
 
-			while(0 < bytesRead) {
-				counter++;
-				int Symbol =  data[counter];
-				counter++;
-				int len = data[counter];
-				
-				System.out.println(Symbol);
+		while(bytesRead != -1) {
 
 			
-			//	bytesRead = inputstream.read(data);
-			}
-			inputstream.close();
-	 */
+			for(int i =0; i < data.length && i < 20; i++)
+				DecoderHuffmanTree.readBytes(data[i]);
+			bytesRead = inputstream.read(data);
+		}
+
+		
+		inputstream.close();
+		DecoderHuffmanTree.decodebuildtree();
+
 	 }
 	 
 }

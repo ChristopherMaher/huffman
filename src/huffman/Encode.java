@@ -25,7 +25,7 @@ public class Encode {
 	public static void main(String... args) throws IOException {
 		FrequencyTable test = new FrequencyTable();
 
-		InputStream inputstream = new FileInputStream("sample.txt");
+		InputStream inputstream = new FileInputStream(args[0]);
 
 		byte[] data   = new byte[1024];
 		int    bytesRead = inputstream.read(data);
@@ -42,11 +42,7 @@ public class Encode {
 		inputstream.close();
 		HuffmanTree.create_initial_node_array();
 		HuffmanTree.buildtree();
-		//System.out.println("ASCII => " + Charset.forName("ASCII"));
-		//String s = "Hello World! \u00ff";
-		//byte[] b = s.getBytes("98");
-		//System.out.println(new String(b, "ISO-98"));
-	//	System.out.println((char)65); 
+	
 		
 		
 	}

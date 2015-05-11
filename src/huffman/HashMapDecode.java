@@ -7,12 +7,10 @@ import java.util.PriorityQueue;
 public class HashMapDecode {
 	static Map<String,Integer> canonicalHashDecode = new HashMap<String,Integer>();
 	public static PriorityQeueCompareCanonical pqcCanonical=new PriorityQeueCompareCanonical();
-	//static PriorityQueue<TreeNode> pqCanonical=new PriorityQueue<TreeNode>(character_set_Nodes.size()+1,pqcCanonical)
 	public static void create_code_hash(){
 	}
 	 
 	public static void create_priority_q(int number_of_symbols){
-		//PriorityQueue<TreeNode> pqCanonical=new PriorityQueue<TreeNode>(character_set_Nodes.size()+1,pqcCanonical);
 
 		
 	}
