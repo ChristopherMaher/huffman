@@ -21,8 +21,6 @@ public class HuffmanTree{
 	
 	static Map<Integer,Integer> canonicalHash = new HashMap<Integer,Integer>();
 	static Set<TreeNode> character_set_Nodes = new HashSet<TreeNode>();
-	public static PriorityQeueCompareCanonical pqcCanonical=new PriorityQeueCompareCanonical();
-	static PriorityQueue<TreeNode> pqCanonical=new PriorityQueue<TreeNode>(character_set_Nodes.size()+1,pqcCanonical);
 
 	public HuffmanTree( ){
 	
@@ -35,16 +33,17 @@ public class HuffmanTree{
 		//if (pq.peek().characters != null){
 			if(!pq.isEmpty()){
 		TreeNode left=pq.poll();
-			
+	//	System.out.println(left.characters+"LEFT");
 		TreeNode right=pq.poll();
-		
-		TreeNode root = new TreeNode(left.frequency+right.frequency,left.characters+","+right.characters);
-		right.parent = root;
-		left.parent = root;
-		root.left = left;
-		root.right = right;
-		pq.add(root);
-		//System.out.println(root.characters+":"+root.frequency);
+		//System.out.println(right.characters);
+		TreeNode current_node = new TreeNode(left.frequency+right.frequency,left.characters+","+right.characters);
+	//	System.out.println(root.characters+":"+root.frequency);
+
+		right.parent = current_node;
+		left.parent = current_node;
+		current_node.left = left;
+		current_node.right = right;
+		pq.add(current_node);
 		//System.out.println(root.characters);
 		}
 	
@@ -52,9 +51,12 @@ public class HuffmanTree{
 			//}
 
 		}
+	
+		System.out.print("SDF");
+		TreeNode test1=(pq.peek());
 		setDepth (pq.peek());
 		traverse(pq.peek());
-		canonicalMapMaker();
+		EncodeCanonicalHuffman.canonicalMapMaker();
 
 	}
 	/**
@@ -70,13 +72,17 @@ public class HuffmanTree{
 			TreeNode temp2 =new TreeNode(FrequencyTable.frequencyHash.get(keys[x]),keys[x].toString());
 			if(temp2.frequency != 0){
 			pq.add(temp2);
+			//EncodeCanonicalHuffman.pqCanonical.add(temp2);
+
+			EncodeCanonicalHuffman.tempset.add(temp2);
+			//System.out.println(EncodeCanonicalHuffman.pqCanonical);
 			character_set_Nodes.add(temp2);
 			
 			
 			}
 
 		}
-		
+		//System.out.print(FrequencyTable.frequencyHash);
 		
 	}
 /**
@@ -93,7 +99,7 @@ public class HuffmanTree{
 	        
 	    }
 		
-		 System.out.println(root.characters+" :"+root.frequency);
+		// System.out.println(root.characters+" :"+root.frequency);
 	    
 	   
 	    if (root.right != null){
@@ -138,35 +144,7 @@ public class HuffmanTree{
 
 	}
 	
-	/**
-	 * makes a canonical HashMap
-	 * was supposed to allow for future encoding.
-	 * here is the rough,rough start
-	 * 
-	 */
 	
-	public static void canonicalMapMaker(){
-		
-		for(TreeNode the_node: character_set_Nodes){
-			pqCanonical.add(the_node);
-		
-			
-		}
-	    String s = "0000";
-	    for (int i = 0; i < 3; i++) {
-	        System.out.println(s);
-	      //  System.out.println("\t" + Integer.valueOf(s, 2));
-	        s = Integer.toBinaryString(Integer.valueOf(s, 2) + 1);
-	        while(s.length() != 4){
-	        	s = "0"+s;
-	        }
-	        
-	    }
-
-		
-		
 	
-	}
 	
-		
 }

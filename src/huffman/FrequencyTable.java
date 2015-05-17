@@ -39,10 +39,8 @@ int counters =0;
   frequencyHash.put(file,temp);
    cont++;
    		
-System.out.println(frequencyHash);
   }
 return frequencyHash;
 }
-
 
 }

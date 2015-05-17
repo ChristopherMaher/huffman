@@ -22,9 +22,9 @@ public class PriorityQeueCompareCanonical implements Comparator<TreeNode> {
 				return 1;
 			} else {
 					if(node_characters1>node_characters2){
-						return -1;
-					}else{
 						return 1;
+					}else{
+						return -1;
 
 					}
 					

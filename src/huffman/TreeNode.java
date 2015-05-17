@@ -8,6 +8,7 @@ TreeNode right;
 TreeNode parent;
 public int depth;
 public String canonical_code;
+Boolean leaf;
 /**
  * 
  * @param frequency
@@ -18,6 +19,7 @@ public TreeNode(int frequency,String characters){
 	this.characters= characters;
 	left = null;
 	right = null;
+	leaf=false;
 	
 	}
 /**
@@ -28,11 +30,15 @@ public TreeNode(int frequency,String characters){
 public TreeNode(String characters,int depth){
 	this.characters = characters;
 	this.depth = depth;
+	leaf=false;
+
 }
 /**
  * 
  */
 public TreeNode(){
+	leaf=false;
+
 	//this.characters = characters;
 	//this.depth = depth;
 }

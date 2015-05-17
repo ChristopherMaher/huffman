@@ -1,13 +1,16 @@
 package huffman;
 
+import java.util.ArrayDeque;
 import java.util.PriorityQueue;
 
 public class DecoderHuffmanTree {
+	static TreeNode head;
 	private TreeNode root;
 	private int character;
 	private int frequency;
 	public static PriorityQeueCompare pqc=new PriorityQeueCompare();
 	static PriorityQueue<TreeNode> pqTree=new PriorityQueue<TreeNode>(Decode.number_of_symbols,pqc);
+	static ArrayDeque<TreeNode> stacking = new ArrayDeque<TreeNode>();
 	public DecoderHuffmanTree(){
  
 }
@@ -15,66 +18,55 @@ public class DecoderHuffmanTree {
  * builds a canonical huffman tree to allow for 
  * decoding.
  */
-public static void decodebuildtree(){
-TreeNode root = new TreeNode();
+public static TreeNode decodebuildtree(){
+TreeNode current = new TreeNode();
+TreeNode head = current;
 while(!pqTree.isEmpty()){
-	
 TreeNode temp=pqTree.poll();
 for(int x=0;x<temp.canonical_code.length();x++){
 	
+if(temp.canonical_code.length()-1 == x)	
 if(temp.canonical_code.charAt(temp.canonical_code.length()-1)=='0'){
-			
-			root.left=temp;
-			temp.parent = root;
+			current.left=temp;
+			temp.parent = current;
+			current = head;
 			break;
 		}
+if(temp.canonical_code.length()-1 == x)	
 if(temp.canonical_code.charAt(temp.canonical_code.length()-1)=='1'){
 			
-			root.right=temp;
-			temp.parent = root;
+			current.right=temp;
+			temp.parent = current;
+			current = head;
 			break;
 		}
 if(temp.canonical_code.charAt(x)=='0'){
 	
 
-		if(root.left==null){
+		if(current.left==null){
 			TreeNode temp2 = new TreeNode();
-			root.left = temp2;
-			temp2.parent = root;
-			root = temp2;
+			current.left = temp2;
+			temp2.parent = current;
+			current = temp2;
 			
-		}else if(root.left!=null){
-			root = root.left;
+		}else if(current.left!=null){
+			current = current.left;
 		}
 }else if(temp.canonical_code.charAt(x)=='1'){ 
-		if(root.right!=null){
-			root = root.right;
-		}else if(root.right==null){
+		if(current.right!=null){
+			current = current.right;
+		}else if(current.right==null){
 			TreeNode temp2 = new TreeNode();
-			root.right = temp2;
-			temp2.parent=root;
-			root = temp2;
+			current.right = temp2;
+			temp2.parent=current;
+			current = temp2;
 		}
 		}
 	}
 }
-}
 
-/**
- * 
- * @param read_byte
- * was going to read and compare the mask byte to the read in byte. Telling which way to go down the tree
- */
-public static void readBytes(Byte read_byte){
-	int mask = 0x80;
-	int value = (read_byte & mask);
-	if(value==1){
-		
-	}else{
-		
-	}
+return head;
 }
-
 
 
 }
