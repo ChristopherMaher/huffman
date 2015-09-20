@@ -1,3 +1,3 @@
 # huffman
-Designed to take a text file to encode or decode it using huffman encoding.</br>
-Spring(Junior Year)
+Junior Year : Spring Semester </br>
+Encodes and decodes a text file using huffman encoding.</br>
